@@ -581,7 +581,7 @@ spawn(function()
 	Background.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Background.BorderSizePixel = 0
 	Background.Position = UDim2.new(0.388957828, 0, 0.700122297, 0)
-	Background.Size = UDim2.new(0, 200, 0, 51)
+	Background.Size = UDim2.new(0, 358, 0, 79)
 	Background.Visible = false
 
 	Picture.Name = "Actyrn#7104"
@@ -589,7 +589,7 @@ spawn(function()
 	Picture.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Picture.BorderSizePixel = 0
 	Picture.Position = UDim2.new(0.0279329624, 0, 0.0704225376, 0)
-	Picture.Size = UDim2.new(0, 30, 0, 30)
+	Picture.Size = UDim2.new(0, 59, 0, 59)
 	Picture.Transparency = 1
 	Picture.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 
