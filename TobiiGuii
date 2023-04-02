@@ -66,7 +66,7 @@ local Utilities = {
 
 local TargetAimbot = {
 	Enabled = true, 
-	Keybind = q, 
+	Keybind = nil, 
 
 	Prediction = .173, 
 	Resolver = true, 
@@ -78,7 +78,7 @@ local TargetAimbot = {
 	RealHitPart = nil, 
 
 	MousePosType = "UpdateMousePos", -- "UpdateMousePos", "GetMousePos", "MousePos"
-	Notifications = false, 
+	Notifications = true, 
 
 	LookAt = true, 
 	ViewAt = false, 
@@ -250,15 +250,15 @@ end)
 -- Target Aimbot
 
 TargetAimbotSec:AddToggle("Enabled", true, function(x)
-	TargetAimbot.Enabled = true
+	TargetAimbot.Enabled = x
 end)
 
 TargetAimbotSec:AddKeybind("Keybind", true, function(x)
-	TargetAimbot.Keybind = q
+	TargetAimbot.Keybind = x
 end)
 
 TargetAimbotSec:AddTextbox("Prediction", true, function(x)
-	TargetAimbot.Prediction = .173
+	TargetAimbot.Prediction = nil
 end)
 
 local TargResolverTog = TargetAimbotSec:AddToggle("Antilock Resolver", false, function(x)
@@ -267,7 +267,7 @@ end)
 
 TargResolverTog:AddKeybind()
 
-TargetAimbotSec:AddSlider("Jump Offset", -3, 0.09, 3, 100, function(x)
+TargetAimbotSec:AddButton("Jump Offset", -3, 0.09, 3, 100, function(x)
 	TargetAimbot.JumpOffset = 0.09
 	TargetAimbot.RealJumpOffset = 0.09
 end)
@@ -301,7 +301,7 @@ TargetAimbotSec:AddToggle("Notifications", true, function(x)
 	TargetAimbot.Notifications = x
 end)
 
-TargetAimbotSec:AddToggle("Look At", false, function(x)
+TargetAimbotSec:AddToggle("Look At", true, function(x)
 	TargetAimbot.LookAt = x
 end)
 
