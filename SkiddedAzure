@@ -66,7 +66,7 @@ local Utilities = {
 
 local TargetAimbot = {
 	Enabled = true, 
-	Keybind = nil, 
+	Keybind = q, 
 
 	Prediction = .173, 
 	Resolver = true, 
@@ -253,12 +253,12 @@ TargetAimbotSec:AddToggle("Enabled", false, function(x)
 	TargetAimbot.Enabled = x
 end)
 
-TargetAimbotSec:AddKeybind("Keybind", nil, function(x)
-	TargetAimbot.Keybind = x
+TargetAimbotSec:AddKeybind("Keybind", q, function(x)
+	TargetAimbot.Keybind = q
 end)
 
 TargetAimbotSec:AddTextbox("Prediction", nil, function(x)
-	TargetAimbot.Prediction = x
+	TargetAimbot.Prediction = .173
 end)
 
 local TargResolverTog = TargetAimbotSec:AddToggle("Antilock Resolver", false, function(x)
@@ -267,9 +267,9 @@ end)
 
 TargResolverTog:AddKeybind()
 
-TargetAimbotSec:AddSlider("Jump Offset", -3, 0, 3, 100, function(x)
-	TargetAimbot.JumpOffset = x
-	TargetAimbot.RealJumpOffset = x
+TargetAimbotSec:AddSlider("Jump Offset", -3, 0.09, 3, 100, function(x)
+	TargetAimbot.JumpOffset = 0.09
+	TargetAimbot.RealJumpOffset = 0.09
 end)
 
 TargetAimbotSec:AddDropdown("Hit-Part(s)", {
