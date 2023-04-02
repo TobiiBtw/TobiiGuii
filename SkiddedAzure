@@ -250,14 +250,14 @@ end)
 -- Target Aimbot
 
 TargetAimbotSec:AddToggle("Enabled", true, function(x)
-	TargetAimbot.Enabled = q
+	TargetAimbot.Enabled = x
 end)
 
-TargetAimbotSec:AddKeybind("Keybind", q, function(x)
+TargetAimbotSec:AddKeybind("Keybind", true, function(x)
 	TargetAimbot.Keybind = q
 end)
 
-TargetAimbotSec:AddTextbox("Prediction", nil, function(x)
+TargetAimbotSec:AddTextbox("Prediction", true, function(x)
 	TargetAimbot.Prediction = .173
 end)
 
@@ -311,7 +311,7 @@ end)
 
 ViewAtTog:AddKeybind()
 
-local TargDotTog = TargetAimbotSec:AddToggle("Dot", false, function(x)
+local TargDotTog = TargetAimbotSec:AddToggle("Dot", true, function(x)
 	TargetAimbot.Dot = x
 end)
 
