@@ -249,8 +249,8 @@ end)
 
 -- Target Aimbot
 
-TargetAimbotSec:AddToggle("Enabled", trur, function(x)
-	TargetAimbot.Enabled = x
+TargetAimbotSec:AddToggle("Enabled", true, function(x)
+	TargetAimbot.Enabled = q
 end)
 
 TargetAimbotSec:AddKeybind("Keybind", q, function(x)
