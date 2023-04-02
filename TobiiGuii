@@ -249,16 +249,16 @@ end)
 
 -- Target Aimbot
 
-TargetAimbotSec:AddToggle("Enabled", false, function(x)
-	TargetAimbot.Enabled = x
+TargetAimbotSec:AddToggle("Enabled", true, function(x)
+	TargetAimbot.Enabled = true
 end)
 
-TargetAimbotSec:AddKeybind("Keybind", nil, function(x)
-	TargetAimbot.Keybind = x
+TargetAimbotSec:AddKeybind("Keybind", true, function(x)
+	TargetAimbot.Keybind = q
 end)
 
-TargetAimbotSec:AddTextbox("Prediction", nil, function(x)
-	TargetAimbot.Prediction = x
+TargetAimbotSec:AddTextbox("Prediction", true, function(x)
+	TargetAimbot.Prediction = .173
 end)
 
 local TargResolverTog = TargetAimbotSec:AddToggle("Antilock Resolver", false, function(x)
@@ -267,9 +267,9 @@ end)
 
 TargResolverTog:AddKeybind()
 
-TargetAimbotSec:AddSlider("Jump Offset", -3, 0, 3, 100, function(x)
-	TargetAimbot.JumpOffset = x
-	TargetAimbot.RealJumpOffset = x
+TargetAimbotSec:AddSlider("Jump Offset", -3, 0.09, 3, 100, function(x)
+	TargetAimbot.JumpOffset = 0.09
+	TargetAimbot.RealJumpOffset = 0.09
 end)
 
 TargetAimbotSec:AddDropdown("Hit-Part(s)", {
@@ -297,7 +297,7 @@ TargetAimbotSec:AddDropdown("MousePos Type", {
 	TargetAimbot.MousePosType = x
 end)
 
-TargetAimbotSec:AddToggle("Notifications", false, function(x)
+TargetAimbotSec:AddToggle("Notifications", true, function(x)
 	TargetAimbot.Notifications = x
 end)
 
