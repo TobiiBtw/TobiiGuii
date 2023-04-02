@@ -1,0 +1,651 @@
+local kavoUi = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
+local window = kavoUi.CreateLib("你好 1Tobii#0279","DarkTheme")
+
+---Tabs
+
+local Tab1 = window:NewTab("Resolvers")
+local Tab1Section = Tab1:NewSection("Resolver")
+local Tab2 = window:NewTab("AntiLocks")
+local Tab2Section = Tab2:NewSection("AntiLock")
+local Tab3 = window:NewTab("Locks")
+local Tab3Section = Tab3:NewSection("Locks")
+local Tab4 = window:NewTab("Credits")
+local Tab4Section = Tab4:NewSection("Made By 1Tobii")
+
+---Buttons
+
+Tab1Section:NewButton("Resolver","ResolvesAnti",function()
+local RunService = game:GetService("RunService")
+
+local function zeroOutYVelocity(hrp)
+    hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+    hrp.AssemblyLinearVelocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)
+end
+
+local function onPlayerAdded(player)
+    player.CharacterAdded:Connect(function(character)
+        local hrp = character:WaitForChild("HumanoidRootPart")
+        zeroOutYVelocity(hrp)
+    end)
+end
+
+local function onPlayerRemoving(player)
+    player.CharacterAdded:Disconnect()
+end
+
+game.Players.PlayerAdded:Connect(onPlayerAdded)
+game.Players.PlayerRemoving:Connect(onPlayerRemoving)
+
+RunService.Heartbeat:Connect(function()
+    pcall(function()
+        for i, player in pairs(game.Players:GetChildren()) do
+            if player.Name ~= game.Players.LocalPlayer.Name then
+                local hrp = player.Character.HumanoidRootPart
+                zeroOutYVelocity(hrp)
+            end
+        end
+    end)
+end)
+end)
+
+Tab1Section:NewButton("ResolverUndergroundAA","ResolvesUnderground",function()
+local RunService = game:GetService("RunService")
+local RunService = game:GetService("RunService")
+
+RunService.Heartbeat:Connect(function()
+    pcall(function()
+        for i,v in pairs(game.Players:GetChildren()) do
+            if v.Name ~= game.Players.LocalPlayer.Name then
+                local hrp = v.Character.HumanoidRootPart
+                hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)    
+                hrp.AssemblyLinearVelocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)   
+            end
+        end
+    end)
+end)
+end)
+
+Tab1Section:NewButton("ResolvesVelocity","VelocityRecalculator",function()
+local RunService = game:GetService("RunService")
+local function get_calculated_velocity(obj)
+    if nil_check(obj) and obj.Character and obj.Character:FindFirstChild(HumanoidRootPart) then
+        local root = obj.Character.HumanoidRootPart
+        local character = obj.Character 
+
+        local currentPosition = root.Position
+        local currentTime = tick() 
+
+        wait(0.00350) 
+
+        local newPosition = root.Position
+        local newTime = tick()
+        
+        local distanceTraveled = (newPosition - currentPosition) 
+
+        local timeInterval = newTime - currentTime
+        local velocity = distanceTraveled / timeInterval
+        currentPosition = newPosition
+        currentTime = newTime
+        return velocity
+    end
+end
+end)
+
+Tab1Section:NewButton("ResolvesLinear","ResolvesLinearDesync",function()
+local RunService = game:GetService("RunService")
+local a=setmetatable({},{__index=function(b,c)local d=game.GetService(game,c)if d then b[c]=d end;return d end})local e=a.Players.LocalPlayer;local function f(g)local h=false;local i;local j;local function k(l)i=l;repeat wait()j=l:FindFirstChild("HumanoidRootPart")until j;h=false end;k(g.Character or g.CharacterAdded:Wait())g.CharacterAdded:Connect(k)a.RunService.Heartbeat:Connect(function()if i and i:IsDescendantOf(workspace)and(j and j:IsDescendantOf(i))then if j.AssemblyAngularVelocity.Magnitude>50 or j.AssemblyLinearVelocity.Magnitude>100 then if h==false then game.StarterGui:SetCore("ChatMakeSystemMessage",{Text="Fling Exploit detected, Player: "..tostring(g),Color=Color3.fromRGB(255,200,0)})end;h=true;for m,n in ipairs(i:GetDescendants())do if n:IsA("BasePart")then n.CanCollide=false;n.AssemblyAngularVelocity=Vector3.new(0,0,0)n.AssemblyLinearVelocity=Vector3.new(0,0,0)n.CustomPhysicalProperties=PhysicalProperties.new(0,0,0)end end;j.CanCollide=false;j.AssemblyAngularVelocity=Vector3.new(0,0,0)j.AssemblyLinearVelocity=Vector3.new(0,0,0)j.CustomPhysicalProperties=PhysicalProperties.new(0,0,0)end end end)end;for m,n in ipairs(a.Players:GetPlayers())do if n~=e then f(n)end end;a.Players.PlayerAdded:Connect(f)local o=nil;a.RunService.Heartbeat:Connect(function()pcall(function()local j=e.Character.PrimaryPart;if j.AssemblyLinearVelocity.Magnitude>250 or j.AssemblyAngularVelocity.Magnitude>250 then j.AssemblyAngularVelocity=Vector3.new(0,0,0)j.AssemblyLinearVelocity=Vector3.new(0,0,0)j.CFrame=o;game.StarterGui:SetCore("ChatMakeSystemMessage",{Text="You were flung. Neutralizing velocity.",Color=Color3.fromRGB(255,0,0)})elseif j.AssemblyLinearVelocity.Magnitude<50 or j.AssemblyAngularVelocity.Magnitude>50 then o=j.CFrame end end)end)
+end)
+
+Tab2Section:NewButton("UnhitabbleAA","ToggleX",function()
+local P1000ToggleKey = "x" -- change  to whatever keybind: "t"
+
+
+
+
+--// Services
+checkcaller = checkcaller
+newcclosure = newcclosure
+hookmetamethod = hookmetamethod
+
+local PastedSources = false
+local BruhXD = game:GetService("RunService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Bullshit = LocalPlayer:GetMouse()
+
+
+--// Toggles
+Bullshit.KeyDown:Connect(function(SayNoToOblivity)
+    if SayNoToOblivity == string.lower(P1000ToggleKey) then
+        pcall(function()
+            if PastedSources == false then
+                PastedSources = true
+                print("Enabled P1000")
+            elseif PastedSources == true then
+                PastedSources = false
+                print("Disabled P1000")
+            end
+        end)
+    end
+end)
+
+Bullshit.KeyDown:Connect(function(SayNoToOblivity)
+    if SayNoToOblivity == ("=") then
+        game:GetService("TeleportService"):Teleport(game.PlaceId, LocalPlayer) 
+    end
+end)
+
+
+--// Desync_Source
+function RandomNumberRange(a)
+    return math.random(-a * 100, a * 100) / 100
+end
+
+function RandomVectorRange(a, b, c)
+    return Vector3.new(RandomNumberRange(a), RandomNumberRange(b), RandomNumberRange(c))
+end
+
+
+local DesyncTypes = {}
+BruhXD.Heartbeat:Connect(function()
+    if PastedSources == true then
+        DesyncTypes[1] = LocalPlayer.Character.HumanoidRootPart.CFrame
+        DesyncTypes[2] = LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity
+
+        local SpoofThis = LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        SpoofThis = SpoofThis * CFrame.new(Vector3.new(0, 0, 0))
+        SpoofThis = SpoofThis * CFrame.Angles(math.rad(RandomNumberRange(180)), math.rad(RandomNumberRange(180)), math.rad(RandomNumberRange(180)))
+
+        LocalPlayer.Character.HumanoidRootPart.CFrame = SpoofThis
+
+        LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(1, 1, 1) * 16384
+
+        BruhXD.RenderStepped:Wait()
+
+        LocalPlayer.Character.HumanoidRootPart.CFrame = DesyncTypes[1]
+        LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity = DesyncTypes[2]
+    end
+end)
+
+
+--// Hook_CFrame
+local XDDDDDD = nil
+XDDDDDD = hookmetamethod(game, "__index", newcclosure(function(self, key)
+    if PastedSources == true then
+        if not checkcaller() then
+            if key == "CFrame" and PastedSources == true and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
+                if self == LocalPlayer.Character.HumanoidRootPart then
+                    return DesyncTypes[1] or CFrame.new()
+                elseif self == LocalPlayer.Character.Head then
+                    return DesyncTypes[1] and DesyncTypes[1] + Vector3.new(0, LocalPlayer.Character.HumanoidRootPart.Size / 2 + 0.5, 0) or CFrame.new()
+                end
+            end
+        end
+    end
+    return XDDDDDD(self, key)
+end))
+end)
+
+Tab2Section:NewButton("WalkableAA","ToggleZ",function()
+getgenv().Desync = true
+getgenv().KeyBind = Enum.KeyCode.K
+
+getgenv().DirectionToShoot = "Up"
+
+--[[
+
+           OPTIONS
+        
+
+           Behind
+           Down -- can easily be resolved with underground resolver
+           ForWard
+           Left
+           One
+           Right
+           Up -- can easily be resolved with underground resolver
+           Zero
+--]]
+
+local uis = game:service'UserInputService'
+uis.InputBegan:Connect(
+    function(a, t)
+        if not t then
+            if a.KeyCode == getgenv().KeyBind and getgenv().Desync == false then
+                getgenv().Desync = true
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Bitey so pro";
+                    Text = "ON";
+                    Icon = "";
+                    Duration = 5;
+                    })
+                elseif a.KeyCode == getgenv().KeyBind and getgenv().Desync == true then
+                getgenv().Desync = false
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Bitey so pro";
+                    Text = "TURNED OFF";
+                    Icon = "";
+                    Duration = 5;
+                    })
+            end
+        end
+end)
+
+getgenv().Direction = nil
+
+if getgenv().DirectionToShoot == "Behind" then
+getgenv().Direction = Vector3.new(0, 0, -1)
+elseif getgenv().DirectionToShoot == "Down" then
+getgenv().Direction = Vector3.new(0, -1, 0)
+elseif getgenv().DirectionToShoot == "ForWard" then
+getgenv().Direction = Vector3.new(0, 0, 1)
+elseif getgenv().DirectionToShoot == "Left" then
+getgenv().Direction = Vector3.new(-1, 0, 0)
+elseif getgenv().DirectionToShoot == "One" then
+getgenv().Direction = Vector3.new(1, 1, 1)
+elseif getgenv().DirectionToShoot == "Right" then
+getgenv().Direction = Vector3.new(1, 0, 0)
+elseif getgenv().DirectionToShoot == "Up" then
+getgenv().Direction = Vector3.new(0, 1, 0)
+elseif getgenv().DirectionToShoot == "Zero" then
+getgenv().Direction = Vector3.new(0, 0, 0)
+end
+
+
+game:GetService("RunService").heartbeat:Connect(function()
+    if getgenv().Desync == true then
+    local abc = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = getgenv().Direction * (2^16)
+    game:GetService("RunService").RenderStepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = abc
+    end
+end)
+end)
+
+Tab2Section:NewButton("KirbAnti","ToggleZ Aimview Toggle T Aimview Enable P",function()
+-- if game.Players.LocalPlayer:IsInGroup(17263032) then (group whitelist EWWWWW)    
+    game.StarterGui:SetCore("SendNotification", {
+     Title = 'Kirbsware Loaded';
+     Text = '.gg/kirb';
+     Icon = 'rbxassetid://12680621604';
+     Duration = "2";
+ })
+_G.enable = false
+_G.color = Color3.fromRGB(255,0,0)
+_G.toggle_keybind = "p"
+_G.swith_nigga = 't' 
+_G.method = "MousePos"
+
+
+
+
+
+local rs = game:GetService("RunService")
+local localPlayer = game.Players.LocalPlayer
+local mouse = localPlayer:GetMouse()
+local target;
+
+
+
+function getgun()
+ for i,v in pairs(target.Character:GetChildren()) do
+     if v and (v:FindFirstChild('Default') or v:FindFirstChild('Handle') )then
+         return v
+     end
+ end
+end
+
+function sendnotifi(message)
+
+
+ game.StarterGui:SetCore("SendNotification", {
+     Title =  '.gg/kirb';
+     Text = message;
+     Icon = 'rbxassetid://12680621604';
+     Duration = "2";
+ })
+
+ end
+
+
+function get_closet()
+ local a = math.huge
+ local b;
+
+
+
+ for i, v in pairs(game.Players:GetPlayers()) do
+     if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Head") and  v.Character:FindFirstChild("HumanoidRootPart")  then
+         local c = game.Workspace.CurrentCamera:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+         local d = (Vector2.new(mouse.X, mouse.Y) - Vector2.new(c.X, c.Y)).Magnitude
+
+         if a > d then
+             b = v
+             a = d
+         end
+     end
+ end
+
+ return b
+end
+
+
+mouse.KeyDown:Connect(function(z)
+ if z == _G.toggle_keybind then
+     if _G.enable == false then
+         _G.enable = true
+         sendnotifi("Aim-Viewer Enabled")
+     elseif _G.enable == true then
+         _G.enable = false 
+         sendnotifi("Aim-Viewer Disabled")
+     end
+ end
+end)
+
+mouse.KeyDown:Connect(function(z)
+ if z == _G.swith_nigga then
+     target = get_closet()
+     sendnotifi("targeting: "..tostring(target.Name))
+ end
+end)
+
+local a=Instance.new("Beam")a.Segments=1;a.Width0=0.2;a.Width1=0.2;a.Color=ColorSequence.new(_G.color)a.FaceCamera=true;local b=Instance.new("Attachment")local c=Instance.new("Attachment")a.Attachment0=b;a.Attachment1=c;a.Parent=workspace.Terrain;b.Parent=workspace.Terrain;c.Parent=workspace.Terrain
+
+task.spawn(function()
+ rs.RenderStepped:Connect(function()
+
+ local character = localPlayer.Character
+     if not character then
+     a.Enabled = false
+     return
+ end
+
+
+
+
+
+
+ if _G.enable  and getgun() and target.Character:FindFirstChild("BodyEffects") and target.Character:FindFirstChild("Head")  then
+     a.Enabled = true
+     b.Position =  target.Character:FindFirstChild("Head").Position
+     c.Position = target.Character.BodyEffects[_G.method].Value ---edit this if some random ass game got some weird ass other name :palingface
+ else
+     a.Enabled = false
+ end
+
+ end)
+end)
+
+
+getgenv().VelocityChanger = false
+getgenv().Velocity = Vector3.new(200,700,200)
+getgenv().KeyBind = "z"
+
+local Players     = game:GetService("Players")
+local RunService  = game:GetService("RunService")
+local UIS = game:GetService("UserInputService")
+
+local LocalPlayer = Players.LocalPlayer
+local Character   = LocalPlayer.Character
+local RootPart    = Character:FindFirstChild("HumanoidRootPart")
+
+
+local Heartbeat, RStepped, Stepped = RunService.Heartbeat, RunService.RenderStepped, RunService.Stepped
+
+LocalPlayer.CharacterAdded:Connect(function(NewCharacter)
+ Character = NewCharacter
+end)
+
+local RVelocity, YVelocity = nil, 0.1
+function sendnotifi(message)
+
+
+ game.StarterGui:SetCore("SendNotification", {
+     Title =  '.gg/kirb';
+     Text = message;
+     Icon = 'rbxassetid://12680621604';
+     Duration = "2";
+ })
+ end
+
+ UIS.InputBegan:Connect(function(input)
+     if input.KeyCode == Enum.KeyCode.Z then
+         if VelocityChanger == false then
+             sendnotifi("Anti-Lock Disabled")
+         elseif VelocityChanger == true then
+             sendnotifi("Anti-Lock Enabled")
+         end
+     end
+ end)
+ 
+
+
+UIS.InputBegan:Connect(function(input)
+if not (UIS:GetFocusedTextBox()) then
+ if input.KeyCode == Enum.KeyCode.Z then
+     if VelocityChanger then
+         VelocityChanger = false
+     else
+         VelocityChanger = true
+         task.spawn(function()
+                 while VelocityChanger do
+                     print("Running")
+                     if (not RootPart) or (not RootPart.Parent) or (not RootPart.Parent.Parent) then
+                         repeat task.wait() RootPart = Character:FindFirstChild("HumanoidRootPart") until RootPart ~= nil
+                     else
+                         RVelocity = RootPart.Velocity
+
+                         RootPart.Velocity = type(Velocity) == "vector" and Velocity or Velocity(RVelocity)
+
+                         RStepped:wait()
+
+                         RootPart.Velocity = RVelocity
+                     end
+                 Heartbeat:wait()
+             end
+         end)
+     end
+     end
+ end
+end)
+end)
+
+Tab3Section:NewButton("FlashLock","KeybindQ",function()
+getgenv().Key = Enum.KeyCode.Q
+getgenv().Prediction = 0.134489
+    getgenv().AirshotFunccc = true
+    getgenv().Tracer = false
+    getgenv().Partz = "Head" -- LowerTorso, HumanoidRootPart,Head,UpperTorso    
+        local Locking = false
+    
+
+
+
+local Tracer = Drawing.new("Circle")
+Tracer.Visible = false
+Tracer.Radius = 7
+Tracer.Filled = false
+Tracer.Color = Color3.fromRGB(255, 0, 212)
+Tracer.Thickness = 1
+Tracer.Transparency = 1
+
+        
+
+    function x(tt,tx,cc)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = tt;
+        Text = tx;
+        Duration = cc;
+    })
+end
+
+x("Yun", "Loaded", 3)
+
+
+    if getgenv().flashyes == true then
+                       x("Yun", "Already Loaded", 5)
+        return
+    end
+    getgenv().flashyes = true
+    
+        local UserInputService = game:GetService("UserInputService")
+
+    UserInputService.InputBegan:Connect(function(keygo,ok)
+           if (not ok) then
+           if (keygo.KeyCode == getgenv().Key) then
+               Locking = not Locking
+               if Locking then
+               Plr =  getClosestPlayerToCursor()
+                x("Yun", ""..Plr.Character.Humanoid.DisplayName, 3)
+elseif not Locking then
+    if Plr then Plr = nil
+                       x("Yun", "Unlocked", 3)
+     
+         
+end
+end
+end
+end
+end)
+    function getClosestPlayerToCursor()
+        local closestPlayer
+        local shortestDistance = 137
+
+        for i, v in pairs(game.Players:GetPlayers()) do
+            if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("LowerTorso") then
+                local pos = game:GetService"Workspace".CurrentCamera:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+                local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(game.Players.LocalPlayer:GetMouse().X, game.Players.LocalPlayer:GetMouse().Y)).magnitude
+                if magnitude < shortestDistance then
+                    closestPlayer = v
+                    shortestDistance = magnitude
+                end
+            end
+        end
+        return closestPlayer
+    end
+
+
+
+    
+    
+
+    local rawmetatable = getrawmetatable(game)
+    local old = rawmetatable.__namecall
+    setreadonly(rawmetatable, false)
+    rawmetatable.__namecall = newcclosure(function(...)
+        local args = {...}
+        if Plr ~= nil  and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
+            args[3] = Plr.Character[getgenv().Partz].Position+(Plr.Character[getgenv().Partz].Velocity*Prediction)
+            return old(unpack(args))
+        end
+        return old(...)
+    end)
+
+
+game:GetService("RunService").RenderStepped:connect(function()    
+if getgenv().AirshotFunccc == true then
+
+            if Plr ~= nil and Plr.Character.Humanoid.FloorMaterial == Enum.Material.Air then
+                getgenv().Partz = "RightFoot"
+            else
+               
+                        getgenv().Partz = "LowerTorso"
+            end
+end
+         
+
+        if getgenv().Tracer == true and Locking then
+            local Vector, OnScreen = game:GetService"Workspace".CurrentCamera:worldToViewportPoint(Plr.Character[getgenv().Partz].Position+(Plr.Character[getgenv().Partz].Velocity*Prediction))
+            Tracer.Visible = true
+   Tracer.Position = Vector2.new(Vector.X, Vector.Y)
+        else
+            Tracer.Visible = false
+        end
+    
+
+    end)
+end)
+
+Tab3Section:NewButton("Keyboard","KeyboardLikePc",function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+end)
+
+Tab3Section:NewButton("Cframe","Speed!",function()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Speed", "DarkTheme")
+
+local speed = Window:NewTab("Speed")
+local rs = speed:NewSection("CFrame Speed")
+rs:NewButton("CFrame Guns FIX", "ButtonInfo", function()
+    for _, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Script") and v.Name ~= "Health" and v.Name ~= "Sound" and v:FindFirstChild("LocalScript") then
+            v:Destroy()
+        end
+    end
+    game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
+        repeat
+            wait()
+        until game.Players.LocalPlayer.Character
+        char.ChildAdded:Connect(function(child)
+            if child:IsA("Script") then 
+                wait(0.1)
+                if child:FindFirstChild("LocalScript") then
+                    child.LocalScript:FireServer()
+                end
+            end
+        end)
+    end)
+end)
+rs:NewButton("CFrame Speed (Z)", "ButtonInfo", function()
+        repeat
+        wait()
+    until game:IsLoaded()
+    local L_134_ = game:service('Players')
+    local L_135_ = L_134_.LocalPlayer
+    repeat
+        wait()
+    until L_135_.Character
+    local L_136_ = game:service('UserInputService')
+    local L_137_ = game:service('RunService')
+    getgenv().Multiplier = 0.5
+    local L_138_ = true
+    local L_139_
+    L_136_.InputBegan:connect(function(L_140_arg0)
+        if L_140_arg0.KeyCode == Enum.KeyCode.LeftBracket then
+            Multiplier = Multiplier + 0.01
+            print(Multiplier)
+            wait(0.2)
+            while L_136_:IsKeyDown(Enum.KeyCode.LeftBracket) do
+                wait()
+                Multiplier = Multiplier + 0.01
+                print(Multiplier)
+            end
+        end
+        if L_140_arg0.KeyCode == Enum.KeyCode.RightBracket then
+            Multiplier = Multiplier - 0.01
+            print(Multiplier)
+            wait(0.2)
+            while L_136_:IsKeyDown(Enum.KeyCode.RightBracket) do
+                wait()
+                Multiplier = Multiplier - 0.01
+                print(Multiplier)
+            end
+        end
+        if L_140_arg0.KeyCode == Enum.KeyCode.Z then
+            L_138_ = not L_138_
+            if L_138_ == true then
+                repeat
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.Humanoid.MoveDirection * Multiplier
+                    game:GetService("RunService").Stepped:wait()
+                until L_138_ == false
+            end
+        end
+    end)
+end)
+rs:NewSlider("CFrame Speed ", "SliderInfo", 5, 5, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    getgenv().Multiplier = s
+end)
+rs:NewKeybind("Toggle UI", "KeybindInfo", Enum.KeyCode.V, function()
+    Library.ToggleUI()
+end)
+end)
