@@ -66,7 +66,7 @@ local Utilities = {
 
 local TargetAimbot = {
 	Enabled = true, 
-	Keybind = nil, 
+	Keybind = q, 
 
 	Prediction = nil, 
 	Resolver = false, 
@@ -253,7 +253,7 @@ TargetAimbotSec:AddToggle("Enabled", true, function(x)
 	TargetAimbot.Enabled = x
 end)
 
-TargetAimbotSec:AddKeybind("Keybind", nil, function(x)
+TargetAimbotSec:AddKeybind("Keybind", q, function(x)
 	TargetAimbot.Keybind = x
 end)
 
@@ -297,7 +297,7 @@ TargetAimbotSec:AddDropdown("MousePos Type", {
 	TargetAimbot.MousePosType = x
 end)
 
-TargetAimbotSec:AddToggle("Notifications", false, function(x)
+TargetAimbotSec:AddToggle("Notifications", true, function(x)
 	TargetAimbot.Notifications = x
 end)
 
