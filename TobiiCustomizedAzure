@@ -65,7 +65,7 @@ local Utilities = {
 }
 
 local TargetAimbot = {
-	Enabled = false, 
+	Enabled = true, 
 	Keybind = nil, 
 
 	Prediction = nil, 
@@ -249,7 +249,7 @@ end)
 
 -- Target Aimbot
 
-TargetAimbotSec:AddToggle("Enabled", false, function(x)
+TargetAimbotSec:AddToggle("Enabled", true, function(x)
 	TargetAimbot.Enabled = x
 end)
 
