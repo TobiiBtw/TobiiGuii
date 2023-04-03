@@ -1,4 +1,3 @@
-
 __=
 
 	"Discord: Actyrn#7104, Server: .gg/wDngb2mv4H"
@@ -23,8 +22,7 @@ local Plr = game.Players.LocalPlayer
 local RunService = game.RunService
 local UserInputService = game.UserInputService
 
-local Gmt = getrawmetatable(game)
-local Old = Gmt.__namecall
+local Old = getrawmetatable(game).__namecall
 local NewIndex
 
 local StrafeSpeed = 0
@@ -67,7 +65,7 @@ local Utilities = {
 
 local TargetAimbot = {
 	Enabled = true, 
-	Keybind = q, 
+	Keybind = nil, 
 
 	Prediction = nil, 
 	Resolver = false, 
@@ -79,12 +77,12 @@ local TargetAimbot = {
 	RealHitPart = nil, 
 
 	MousePosType = "UpdateMousePos", -- "UpdateMousePos", "GetMousePos", "MousePos"
-	Notifications = true, 
+	Notifications = false, 
 
-	LookAt = true, 
+	LookAt = false, 
 	ViewAt = false, 
 
-	Dot = true, 
+	Dot = false, 
 	Tracer = false, 
 
 	DotOnCursor = false, 
@@ -180,7 +178,7 @@ function ClosestPlr(UseFov, FovCircle)
 	return Closest
 end
 
---Stuff
+-- Stuff
 
 game.CorePackages.Packages:Destroy()
 
@@ -213,18 +211,18 @@ library:CheckErrors(true, true, Plr, __, Actyrn7104) -- If you remove there's a 
 
 local Actyrn_7104 = library:CreateWindow("Azure Modded | Actyrn#7104 | .gg/wDngb2mv4H", Vector2.new(492, 592), Enum.KeyCode.RightShift)
 
--- Tabs --
+-- Tabs
 
 local MainTab = Actyrn_7104:CreateTab("Main")
 local MiscTab = Actyrn_7104:CreateTab("Misc")
 
--- MAIN --
+-- MAIN
 
 local UtilitiesSec = MainTab:CreateSector("Utilities", "right")
 local TargetAimbotSec = MainTab:CreateSector("Target Aimbot", "left") 
 local CameraAimbotSec = MainTab:CreateSector("Camera Aimbot", "right")
 
--- MISC --
+-- MISC
 
 local MovementSec = MiscTab:CreateSector("Movement", "left")
 local SelfDotSec = MiscTab:CreateSector("Self Dot", "left")
@@ -232,7 +230,7 @@ local AntiLockSec = MiscTab:CreateSector("Anti Lock", "right")
 
 -- Toggles
 
--- MAIN --
+-- MAIN
 
 -- Utilities
 
@@ -250,11 +248,11 @@ end)
 
 -- Target Aimbot
 
-TargetAimbotSec:AddToggle("Enabled", true, function(x)
+TargetAimbotSec:AddToggle("Enabled", false, function(x)
 	TargetAimbot.Enabled = x
 end)
 
-TargetAimbotSec:AddKeybind("Keybind", q, function(x)
+TargetAimbotSec:AddKeybind("Keybind", nil, function(x)
 	TargetAimbot.Keybind = x
 end)
 
@@ -262,7 +260,7 @@ TargetAimbotSec:AddTextbox("Prediction", nil, function(x)
 	TargetAimbot.Prediction = x
 end)
 
-local TargResolverTog = TargetAimbotSec:AddToggle("Antilock Resolver", true, function(x)
+local TargResolverTog = TargetAimbotSec:AddToggle("Antilock Resolver", false, function(x)
 	TargetAimbot.Resolver = x
 end)
 
@@ -298,11 +296,11 @@ TargetAimbotSec:AddDropdown("MousePos Type", {
 	TargetAimbot.MousePosType = x
 end)
 
-TargetAimbotSec:AddToggle("Notifications", true, function(x)
+TargetAimbotSec:AddToggle("Notifications", false, function(x)
 	TargetAimbot.Notifications = x
 end)
 
-TargetAimbotSec:AddToggle("Look At", true, function(x)
+TargetAimbotSec:AddToggle("Look At", false, function(x)
 	TargetAimbot.LookAt = x
 end)
 
@@ -312,7 +310,7 @@ end)
 
 ViewAtTog:AddKeybind()
 
-local TargDotTog = TargetAimbotSec:AddToggle("Dot", true, function(x)
+local TargDotTog = TargetAimbotSec:AddToggle("Dot", false, function(x)
 	TargetAimbot.Dot = x
 end)
 
@@ -427,7 +425,7 @@ CameraAimbotSec:AddSlider("FOV Size", 5, 80, 500, 1, function(x)
 	CamFovCircle.Radius = x * 2
 end)
 
--- MISC --
+-- MISC
 
 -- Movement
 
@@ -682,34 +680,9 @@ end)
 -- Heartbeat Functions
 
 spawn(function()
-	RunService.Heartbeat:Connect(function() 
-		local Pos, OnScreen
-
-		if TargetAimbot.Resolver then
-			Pos, OnScreen = workspace.CurrentCamera:WorldToViewportPoint(TargetPlr.Character[TargetAimbot.RealHitPart].Position + (TargetPlr.Character.Humanoid.MoveDirection * TargetAimbot.Prediction * TargetPlr.Character.Humanoid.WalkSpeed or 16))
-		else
-			Pos, OnScreen = workspace.CurrentCamera:WorldToViewportPoint(TargetPlr.Character[TargetAimbot.RealHitPart].Position + (TargetPlr.Character[TargetAimbot.RealHitPart].Velocity * TargetAimbot.Prediction))
-		end
-
-		if TargetAimbot.Enabled and TargBindEnabled and TargetAimbot.Tracer and OnScreen then
-			TargTracerLine.Visible = true
-			TargTracerLine.From = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
-			TargTracerLine.To = Vector2.new(Pos.X, Pos.Y)
-		else
-			TargTracerLine.Visible = false
-		end
-	end)
-end)
-
-spawn(function()
 	RunService.Heartbeat:Connect(function()
-		local Pos, OnScreen = workspace.CurrentCamera:WorldToViewportPoint(Plr.Character[SelfDot.AimPart].Position + (Plr.Character[SelfDot.AimPart].AssemblyLinearVelocity * SelfDot.Prediction))
-
-		if SelfDot.Enabled and OnScreen then
-			SelfDotCircle.Visible = true
-			SelfDotCircle.Position = Vector2.new(Pos.X, Pos.Y)
-		else
-			SelfDotCircle.Visible = false
+		if TargetAimbot.Enabled and TargBindEnabled and TargetAimbot.LookAt then
+			Plr.Character.HumanoidRootPart.CFrame = CFrame.new(Plr.Character.HumanoidRootPart.CFrame.Position, Vector3.new(TargetPlr.Character.HumanoidRootPart.CFrame.X, Plr.Character.HumanoidRootPart.CFrame.Position.Y, TargetPlr.Character.HumanoidRootPart.CFrame.Z))
 		end
 	end)
 end)
@@ -729,6 +702,36 @@ end)
 
 spawn(function()
 	RunService.Heartbeat:Connect(function()
+		Plr.Character.Humanoid.UseJumpPower = not Utilities.NoJumpCooldown
+	end)
+end)
+
+spawn(function()
+	RunService.Heartbeat:Connect(function()
+		if Utilities.AntiStomp and Plr.Character.Humanoid.Health <= 5 then
+			Plr.Character.Humanoid:Destroy()
+		end
+	end)
+end)
+
+spawn(function()
+	RunService.Heartbeat:Connect(function()
+		if Utilities.NoSlowdown then
+			local SlowdownEffects = Plr.Character.BodyEffects.Movement:FindFirstChild("NoJumping") or Plr.Character.BodyEffects.Movement:FindFirstChild("ReduceWalk") or Plr.Character.BodyEffects.Movement:FindFirstChild("NoWalkSpeed")
+
+			if SlowdownEffects then
+				SlowdownEffects:Destroy()
+			end
+
+			if Plr.Character.BodyEffects.Reload.Value then
+				Plr.Character.BodyEffects.Reload.Value = false
+			end
+		end
+	end)
+end)
+
+spawn(function()
+	RunService.Heartbeat:Connect(function()
 		if Movement.SpeedEnabled then
 			Plr.Character.HumanoidRootPart.CFrame = Plr.Character.HumanoidRootPart.CFrame + Plr.Character.Humanoid.MoveDirection * Movement.SpeedAmount
 		end
@@ -742,6 +745,49 @@ spawn(function()
 
 			Plr.Character.HumanoidRootPart.CFrame = TargetPlr.Character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(StrafeSpeed), 0) * CFrame.new(0, Movement.StrafeHeight, Movement.StrafeDistance)
 		end
+	end)
+end)
+
+spawn(function()
+	RunService.Heartbeat:Connect(function()
+		if Movement.AutoJump and Plr.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and Plr.Character.Humanoid.MoveDirection.Magnitude > 0 then
+			Plr.Character.Humanoid:ChangeState("Jumping")
+			NoJumpCdToggle:Set(true)
+		end
+	end)
+end)
+
+spawn(function()
+	RunService.Heartbeat:Connect(function()
+		pcall(function()
+			if Movement.FlightEnabled then
+				local FlyVelocity = Vector3.new(0, 0.8575, 0)
+
+				if not UserInputService:GetFocusedTextBox() then
+
+					if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+						FlyVelocity = FlyVelocity + (workspace.CurrentCamera.CoordinateFrame.lookVector * Movement.FlightSpeed)
+					end
+
+					if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+						FlyVelocity = FlyVelocity + (workspace.CurrentCamera.CoordinateFrame.rightVector * -Movement.FlightSpeed)
+					end
+
+					if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+						FlyVelocity = FlyVelocity + (workspace.CurrentCamera.CoordinateFrame.lookVector * -Movement.FlightSpeed)
+					end
+
+					if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+						FlyVelocity = FlyVelocity + (workspace.CurrentCamera.CoordinateFrame.rightVector * Movement.FlightSpeed)
+					end
+				end
+
+				Plr.Character.HumanoidRootPart.Velocity = FlyVelocity
+				Plr.Character.Humanoid:ChangeState("Freefall")
+			else
+				Plr.Character.Humanoid:ChangeState("Landing")
+			end
+		end)
 	end)
 end)
 
@@ -813,47 +859,34 @@ spawn(function()
 	end)
 end)
 
-spawn(function()
-	RunService.Heartbeat:Connect(function()
-		if Movement.AutoJump and Plr.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and Plr.Character.Humanoid.MoveDirection.Magnitude > 0 then
-			Plr.Character.Humanoid:ChangeState("Jumping")
-			NoJumpCdToggle:Set(true)
-		end
-	end)
-end)
-
-spawn(function()
-	RunService.Heartbeat:Connect(function()
-		Plr.Character.Humanoid.UseJumpPower = not Utilities.NoJumpCooldown
-	end)
-end)
-
-spawn(function()
-	RunService.Heartbeat:Connect(function()
-		if Utilities.AntiStomp and Plr.Character.Humanoid.Health <= 5 then
-			task.wait()
-			Plr.Character:Destroy()
-		end
-	end)
-end)
-
-spawn(function()
-	RunService.Heartbeat:Connect(function()
-		if Utilities.NoSlowdown then
-			local SlowdownEffects = Plr.Character.BodyEffects.Movement:FindFirstChild("NoJumping") or Plr.Character.BodyEffects.Movement:FindFirstChild("ReduceWalk") or Plr.Character.BodyEffects.Movement:FindFirstChild("NoWalkSpeed")
-
-			if SlowdownEffects then
-				SlowdownEffects:Destroy()
-			end
-
-			if Plr.Character.BodyEffects.Reload.Value then
-				Plr.Character.BodyEffects.Reload.Value = false
-			end
-		end
-	end)
-end)
-
 -- Stepped Functions
+
+spawn(function()
+	RunService.Stepped:Connect(function()
+		if TargetPlr.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
+			TargetAimbot.RealJumpOffset = TargetAimbot.JumpOffset
+		else
+			TargetAimbot.RealJumpOffset = 0
+		end
+	end)
+end)
+
+spawn(function()
+	RunService.Stepped:Connect(function()
+		TargetAimbot.RealHitPart = TargetAimbot.HitParts[math.random(1, #TargetAimbot.HitParts)]
+		wait(0.6)
+	end)
+end)
+
+spawn(function()
+	RunService.Stepped:Connect(function()
+		if CamlockPlr.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
+			CameraAimbot.RealJumpOffset = CameraAimbot.JumpOffset
+		else
+			CameraAimbot.RealJumpOffset = 0
+		end
+	end)
+end)
 
 spawn(function()
 	RunService.Stepped:Connect(function()
@@ -876,62 +909,10 @@ spawn(function()
 	end)
 end)
 
-spawn(function()
-	RunService.Stepped:Connect(function()
-		pcall(function()
-			if Movement.FlightEnabled then
-				local FlyVelocity = Vector3.new(0, 0, 0)
-
-				if not UserInputService:GetFocusedTextBox() then
-
-					if UserInputService:IsKeyDown(Enum.KeyCode.W) then
-						FlyVelocity = FlyVelocity + (workspace.CurrentCamera.CoordinateFrame.lookVector * Movement.FlightSpeed)
-					end
-
-					if UserInputService:IsKeyDown(Enum.KeyCode.A) then
-						FlyVelocity = FlyVelocity + (workspace.CurrentCamera.CoordinateFrame.rightVector * -Movement.FlightSpeed)
-					end
-
-					if UserInputService:IsKeyDown(Enum.KeyCode.S) then
-						FlyVelocity = FlyVelocity + (workspace.CurrentCamera.CoordinateFrame.lookVector * -Movement.FlightSpeed)
-					end
-
-					if UserInputService:IsKeyDown(Enum.KeyCode.D) then
-						FlyVelocity = FlyVelocity + (workspace.CurrentCamera.CoordinateFrame.rightVector * Movement.FlightSpeed)
-					end
-				end
-
-				Plr.Character.HumanoidRootPart.Velocity = FlyVelocity
-				Plr.Character.Humanoid:ChangeState("Freefall")
-			else
-				Plr.Character.Humanoid:ChangeState("Landing")
-			end
-		end)
-	end)
-end)
+-- RenderStepped Functions
 
 spawn(function()
-	RunService.Stepped:Connect(function()
-		if TargetPlr.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
-			TargetAimbot.RealJumpOffset = TargetAimbot.JumpOffset
-		else
-			TargetAimbot.RealJumpOffset = 0
-		end
-	end)
-end)
-
-spawn(function()
-	RunService.Stepped:Connect(function()
-		if CamlockPlr.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
-			CameraAimbot.RealJumpOffset = CameraAimbot.JumpOffset
-		else
-			CameraAimbot.RealJumpOffset = 0
-		end
-	end)
-end)
-
-spawn(function()
-	RunService.Stepped:Connect(function()
+	RunService.RenderStepped:Connect(function()
 		if TargetAimbot.Enabled and TargBindEnabled and TargetAimbot.ViewAt then
 			workspace.CurrentCamera.CameraSubject = TargetPlr.Character.Humanoid
 		else
@@ -941,17 +922,7 @@ spawn(function()
 end)
 
 spawn(function()
-	RunService.Stepped:Connect(function()
-		if TargetAimbot.Enabled and TargBindEnabled and TargetAimbot.Highlight then
-			Highlight.Parent = TargetPlr.Character
-		else
-			Highlight.Parent = game.CoreGui
-		end
-	end)
-end)
-
-spawn(function()
-	RunService.Stepped:Connect(function()
+	RunService.RenderStepped:Connect(function()
 		if TargetAimbot.Enabled and TargBindEnabled and TargetAimbot.Dot  then
 			TargCursorDot.Visible = false
 
@@ -974,13 +945,53 @@ spawn(function()
 end)
 
 spawn(function()
-	RunService.Stepped:Connect(function()
-		TargetAimbot.RealHitPart = TargetAimbot.HitParts[math.random(1, #TargetAimbot.HitParts)]
-		wait(0.6)
+	RunService.RenderStepped:Connect(function() 
+		local Pos, OnScreen
+
+		if TargetAimbot.Resolver then
+			Pos, OnScreen = workspace.CurrentCamera:WorldToViewportPoint(TargetPlr.Character[TargetAimbot.RealHitPart].Position + (TargetPlr.Character.Humanoid.MoveDirection * TargetAimbot.Prediction * TargetPlr.Character.Humanoid.WalkSpeed or 16))
+		else
+			Pos, OnScreen = workspace.CurrentCamera:WorldToViewportPoint(TargetPlr.Character[TargetAimbot.RealHitPart].Position + (TargetPlr.Character[TargetAimbot.RealHitPart].Velocity * TargetAimbot.Prediction))
+		end
+
+		if TargetAimbot.Enabled and TargBindEnabled and TargetAimbot.Tracer and OnScreen then
+			TargTracerLine.Visible = true
+			TargTracerLine.From = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
+			TargTracerLine.To = Vector2.new(Pos.X, Pos.Y)
+		else
+			TargTracerLine.Visible = false
+		end
 	end)
 end)
 
--- RenderStepped Functions
+spawn(function()
+	RunService.RenderStepped:Connect(function()
+		if TargetAimbot.Enabled and TargBindEnabled and TargetAimbot.Highlight then
+			Highlight.Parent = TargetPlr.Character
+		else
+			Highlight.Parent = game.CoreGui
+		end
+	end)
+end)
+
+spawn(function()
+	RunService.RenderStepped:Connect(function()
+		TargFovCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
+	end)
+end)
+
+spawn(function()
+	RunService.RenderStepped:Connect(function()
+		local Pos, OnScreen = workspace.CurrentCamera:WorldToViewportPoint(Plr.Character[SelfDot.AimPart].Position + (Plr.Character[SelfDot.AimPart].AssemblyLinearVelocity * SelfDot.Prediction))
+
+		if SelfDot.Enabled and OnScreen then
+			SelfDotCircle.Visible = true
+			SelfDotCircle.Position = Vector2.new(Pos.X, Pos.Y)
+		else
+			SelfDotCircle.Visible = false
+		end
+	end)
+end)
 
 spawn(function()
 	RunService.RenderStepped:Connect(function()
@@ -1014,19 +1025,7 @@ end)
 
 spawn(function()
 	RunService.RenderStepped:Connect(function()
-		TargFovCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
 		CamFovCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
-	end)
-end)
-
-spawn(function()
-	RunService.RenderStepped:Connect(function()
-		if TargetAimbot.Enabled and TargBindEnabled and TargetAimbot.LookAt then
-			Plr.Character.HumanoidRootPart.CFrame = CFrame.new(Plr.Character.HumanoidRootPart.CFrame.Position, Vector3.new(TargetPlr.Character.HumanoidRootPart.CFrame.X, Plr.Character.HumanoidRootPart.CFrame.Position.Y, TargetPlr.Character.HumanoidRootPart.CFrame.Z))
-			Plr.Character.Humanoid.AutoRotate = false
-		else
-			Plr.Character.Humanoid.AutoRotate = true
-		end
 	end)
 end)
 
@@ -1155,7 +1154,7 @@ getrawmetatable(game).__namecall = newcclosure(function(...)
 	return Old(...)
 end)
 
---Hookmetamethod functions
+-- Hookmetamethod functions
 
 NewIndex = hookmetamethod(game, "__newindex", function(Self, Index, Value)
 	if tostring(getcallingscript()) == "Framework" and tostring(Self):lower():find("camera") and tostring(Index) == "CFrame" then
