@@ -70,8 +70,8 @@ local TargetAimbot = {
 	Prediction = nil, 
 	Resolver = false, 
 
-	JumpOffset = 0.09, 
-	RealJumpOffset = 0.09, 
+	JumpOffset = 0.12, 
+	RealJumpOffset = 0.12, 
 
 	HitParts = {"HumanoidRootPart"}, 
 	RealHitPart = nil, 
@@ -266,9 +266,9 @@ end)
 
 TargResolverTog:AddKeybind()
 
-TargetAimbotSec:AddSlider("Jump Offset", -3, 0.09, 3, 100, function(x)
-	TargetAimbot.JumpOffset = 0.09
-	TargetAimbot.RealJumpOffset = 0.09
+TargetAimbotSec:AddSlider("Jump Offset", -3, 0.12, 3, 100, function(x)
+	TargetAimbot.JumpOffset = 0.12
+	TargetAimbot.RealJumpOffset = 0.12
 end)
 
 TargetAimbotSec:AddDropdown("Hit-Part(s)", {
