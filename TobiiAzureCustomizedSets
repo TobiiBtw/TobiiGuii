@@ -71,7 +71,7 @@ local TargetAimbot = {
 	Resolver = false, 
 
 	JumpOffset = 0.09, 
-	RealJumpOffset = nil, 
+	RealJumpOffset = 0.09, 
 
 	HitParts = {"HumanoidRootPart"}, 
 	RealHitPart = nil, 
@@ -252,7 +252,7 @@ TargetAimbotSec:AddToggle("Enabled", true, function(x)
 	TargetAimbot.Enabled = x
 end)
 
-TargetAimbotSec:AddKeybind("Keybind", nil, function(x)
+TargetAimbotSec:AddKeybind("Keybind", q, function(x)
 	TargetAimbot.Keybind = x
 end)
 
