@@ -800,7 +800,7 @@ NotificationBindable.OnInvoke = callback
 local CC = game:GetService'Workspace'.CurrentCamera
 local Plr
 local enabled = false
-local accomidationfactor = 0.1463
+local accomidationfactor = 0.1574
 local mouse = game.Players.LocalPlayer:GetMouse()
 local placemarker = Instance.new("Part", game.Workspace)
 local guimain = Instance.new("Folder", game.CoreGui)
