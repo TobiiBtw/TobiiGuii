@@ -920,3 +920,6 @@ end
 		return old(...)
 	end)
     end)
+
+Tab3Section:NewButton("Rightclick","RightClickMob",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/Leftclickballi'))()
