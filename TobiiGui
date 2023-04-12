@@ -923,3 +923,79 @@ end
 
 Tab3Section:NewButton("Rightclick","RightClickMob",function() end,
 loadstring(game:HttpGet('https://raw.githubusercontent.com/BalligusapoTT/BalligusapoTT/main/Leftclickballi'))())
+
+Tab3Section:NewButton("ResolverPred","ResolverPred",function()
+-- Universal resolver made by Actyrn#7104
+-- May cause some fps drop when enabled
+
+Settings = {
+	Resolver = {
+		Enabled = false,
+		Bind = Enum.KeyCode.X,
+		Notify = true,
+		Prediction = 16,
+		Type = "With Pred" -- Modes: "With Pred", "Break Pred"
+	}
+}
+
+-- Vars
+
+local runService = game:GetService("RunService")
+local userInput = game:GetService("UserInputService")
+local starterGui = game:GetService("StarterGui")
+local players = game:GetService("Players")
+
+local player = players.LocalPlayer
+
+-- Funcs
+
+local SendNotif = function(text)
+	if Settings.Resolver.Notify then
+		starterGui:SetCore("SendNotification", {
+			Title = "Uni-Resolver | Actyrn#7104",
+			Text = text,
+			Duration = 2.5
+		})
+	end
+end
+
+-- Code
+
+userInput.InputBegan:Connect(function(key)
+	if key.KeyCode == Settings.Resolver.Bind and not userInput:GetFocusedTextBox() then
+		if Settings.Resolver.Enabled then
+			Settings.Resolver.Enabled = false
+
+			SendNotif("Disabled")
+		else
+			Settings.Resolver.Enabled = true
+
+			SendNotif("Enabled")
+		end
+	end
+end)
+
+runService.Heartbeat:Connect(function()
+	if Settings.Resolver.Enabled then
+		for i, Target in pairs(players:GetPlayers()) do
+			if Target ~= player then
+				for i, Part in pairs(Target.Character:GetDescendants()) do
+					if Part:IsA("BasePart") then
+						if Settings.Resolver.Type == "With Pred" then
+							Part.Velocity =
+								Target.Character.Humanoid.MoveDirection * Settings.Resolver.Prediction
+							Part.AssemblyLinearVelocity =
+								Target.Character.Humanoid.MoveDirection * Settings.Resolver.Prediction
+						else
+							Part.Velocity =
+								Part.Velocity * 0
+							Part.AssemblyLinearVelocity =
+								Part.AssemblyLinearVelocity * 0
+						end
+					end
+				end
+			end
+		end
+	end
+end)
+end)
