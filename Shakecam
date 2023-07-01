@@ -35,9 +35,9 @@ getgenv().Splash = {
     },
     Shake = {
         ['Shake_Enabled'] = true,
-        ['X'] = 12,
-        ['Y'] = 12,
-        ['Z'] = 11
+        ['X'] = 09,
+        ['Y'] = 09,
+        ['Z'] = 08
     },
     Easing_Styles = {
         ['Easing1'] = Enum.EasingStyle.Elastic, -- // Style
