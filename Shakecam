@@ -35,7 +35,7 @@ getgenv().Splash = {
     },
     Shake = {
         ['Shake_Enabled'] = true,
-        ['X'] = 1,
+        ['X'] = 06,
         ['Y'] = 0,
         ['Z'] = 0
     },
