@@ -22,7 +22,7 @@ getgenv().Splash = {
         ['Smoothness'] = 2, -- // Smoothness of the aim assist
         ['AimPart'] = "HumanoidRootPart",
         ['DisableOutSideFov'] = true,
-        ['Nearest_Part'] = true,
+        ['Nearest_Part'] = false,
     },    
     FOV = {
         ['Visible'] = false, -- // // FOV visible or not
