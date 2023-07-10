@@ -18,7 +18,7 @@ getgenv().Splash = {
     Aim_Assist = {
         ['Key'] = "Q", -- // Toggle key of aim assist
         ['Enabled'] = true, -- // Self-explanatory
-        ['Prediction'] =  0.095, -- // Prediction on the aim assist
+        ['Prediction'] =  0.14631, -- // Prediction on the aim assist
         ['Smoothness'] = 2, -- // Smoothness of the aim assist
         ['AimPart'] = "Head",
         ['DisableOutSideFov'] = true,
@@ -35,9 +35,9 @@ getgenv().Splash = {
     },
     Shake = {
         ['Shake_Enabled'] = true,
-        ['X'] = 06,
-        ['Y'] = 06,
-        ['Z'] = 05
+        ['X'] = 1,
+        ['Y'] = 0,
+        ['Z'] = 0
     },
     Easing_Styles = {
         ['Easing1'] = Enum.EasingStyle.Elastic, -- // Style
